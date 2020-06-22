@@ -53,6 +53,10 @@ class BlackBoxExplorer:
         lower = self.space.bound[0]
         upper = self.space.bound[1]
 
+        output_path = Path(self.params['output_path'])
+        if not output_path.exists():
+            output_path.mkdir(parents=True)
+
         res = bayesian_optimization(
             self.fn,
             lower,

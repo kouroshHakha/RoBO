@@ -1,7 +1,7 @@
 env: bb_envs/src/bb_envs/ngspice/envs/two_stage_opamp_1.yaml
-seed: 50
+seed: 20
 niter: 100
 maximizer: scipy
 acquisition_func: ei
-model_type: dngo
-output_path: runs/opamp/dngo/s50
+model_type: gp
+output_path: runs/opamp/gp_ei_scipy/s20
