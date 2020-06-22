@@ -8,7 +8,7 @@ from bb_eval_engine.base import EvaluationEngineBase
 from bb_eval_engine.data.design import Design
 
 from utils.data.database import Database
-from utils.file import write_pickle, read_pickle
+from utils.file import write_pickle, read_pickle, write_yaml
 
 from .space import Discrete, Space
 
@@ -21,6 +21,13 @@ class BlackBoxExplorer:
         self.env: EvaluationEngineBase = import_bb_env(params['env'])
         self.db: Database[Design] = Database(keep_sorted_list_of=['cost'])
         self.rng = np.random.RandomState(seed=self.params.get('seed', 10))
+
+
+        self.output_path = Path(self.params['output_path'])
+        if not self.output_path.exists():
+            self.output_path.mkdir(parents=True)
+
+        write_yaml(self.output_path / 'spec.yaml', self.params)
 
         space_dict = {}
         for param_key, param_item in self.env.params.items():
@@ -53,10 +60,6 @@ class BlackBoxExplorer:
         lower = self.space.bound[0]
         upper = self.space.bound[1]
 
-        output_path = Path(self.params['output_path'])
-        if not output_path.exists():
-            output_path.mkdir(parents=True)
-
         res = bayesian_optimization(
             self.fn,
             lower,
@@ -65,7 +68,7 @@ class BlackBoxExplorer:
             acquisition_func=self.params.get('acquisition_func', 'log_ei'),
             model_type=self.params.get('model_type', 'bohamiann'),
             num_iterations=self.params['niter'],
-            output_path=self.params['output_path'],
+            output_path=str(self.output_path),
             rng=self.rng,
         )
         write_pickle(Path(self.params['output_path']) / 'res.pkl', res, mkdir=True)
