@@ -10,18 +10,16 @@ from bb_eval_engine.data.design import Design
 from utils.data.database import Database
 from utils.file import write_pickle, read_pickle, write_yaml
 
-from .space import Discrete, Space
+from bbbo.space import Discrete, Space
 
-from robo.fmin import bayesian_optimization
 
-class BlackBoxExplorer:
+class Explorer:
 
     def __init__(self, params: Mapping[str, Any]):
         self.params = params
         self.env: EvaluationEngineBase = import_bb_env(params['env'])
         self.db: Database[Design] = Database(keep_sorted_list_of=['cost'])
         self.rng = np.random.RandomState(seed=self.params.get('seed', 10))
-
 
         self.output_path = Path(self.params['output_path'])
         if not self.output_path.exists():
@@ -56,21 +54,11 @@ class BlackBoxExplorer:
         res = dsn_objs[0]['cost']
         return res
 
-    def start(self):
-        lower = self.space.bound[0]
-        upper = self.space.bound[1]
+    def get_res(self):
+        raise NotImplementedError
 
-        res = bayesian_optimization(
-            self.fn,
-            lower,
-            upper,
-            maximizer=self.params.get('maximizer', 'scipy'),
-            acquisition_func=self.params.get('acquisition_func', 'log_ei'),
-            model_type=self.params.get('model_type', 'bohamiann'),
-            num_iterations=self.params['niter'],
-            output_path=str(self.output_path),
-            rng=self.rng,
-        )
+    def start(self):
+        res = self.get_res()
         write_pickle(Path(self.params['output_path']) / 'res.pkl', res, mkdir=True)
         return res
 

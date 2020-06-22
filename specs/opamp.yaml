@@ -4,4 +4,4 @@ niter: 100
 maximizer: scipy
 acquisition_func: ei
 model_type: gp_mcmc
-output_path: runs/opamp/gp_ei_scipy/s10
+output_path: runs/opamp/gp_mcmc_ei_scipy/s10

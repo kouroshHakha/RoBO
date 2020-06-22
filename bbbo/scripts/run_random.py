@@ -7,7 +7,7 @@ register_pdb_hook()
 import logging
 logging.basicConfig(level=logging.INFO)
 
-from bbbo.explorer.bo import BOExplorer
+from bbbo.explorer.random import RandomExplorer
 
 def _parse_args():
     parser = argparse.ArgumentParser()
@@ -22,5 +22,5 @@ if __name__ == '__main__':
     _args = _parse_args()
 
     spec = read_yaml(_args.spec)
-    explorer = BOExplorer(spec)
+    explorer = RandomExplorer(spec)
     res = explorer.start()
