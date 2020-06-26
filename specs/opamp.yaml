@@ -1,7 +1,7 @@
 env: bb_envs/src/bb_envs/ngspice/envs/two_stage_opamp_1.yaml
-seed: 10
-niter: 100
-maximizer: scipy
-acquisition_func: ei
-model_type: gp_mcmc
-output_path: runs/opamp/gp_mcmc_ei_scipy/s10
+seed: 20
+niter: 1000
+maximizer: random
+acquisition_func: lcb
+model_type: bohamiann
+output_path: runs/opamp/tpe/s20

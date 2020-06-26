@@ -90,7 +90,7 @@ if __name__ == '__main__':
 
         params_names = list(env.params_vec.keys())
 
-        prefix = f'opamp/dngo/{seed_name}'
+        prefix = f'{seed_path}/{seed_name}'
         for i in range(xdim):
             xmin = env.input_bounds[0][i] * 0.9
             if xmin == 0:

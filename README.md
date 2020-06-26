@@ -55,3 +55,24 @@ year      = {2017},
 month     = dec,
 }
 ```
+
+Using RoBo on ngspice Circuit Design
+------------------------------------
+
+example code:
+
+```
+./run.sh bbbo/scripts/run_bo specs/opamp.yaml
+./run.sh bbbo/scripts/run_pmap $RUNDIR
+```
+
+Content of yaml file:
+```yaml
+env: bb_envs/src/bb_envs/ngspice/envs/two_stage_opamp_1.yaml
+seed: 20                          // seed number 
+niter: 1000                       // number of iterations
+maximizer: random                 // optional parameter for bo Explorer
+acquisition_func: lcb             // optional parameter for bo Explorer
+model_type: bohamiann             // optional parameter for bo Explorer
+output_path: runs/opamp/tpe/s20   // output path (very important to pick a descriptive name)
+```

@@ -22,8 +22,7 @@ class Explorer:
         self.rng = np.random.RandomState(seed=self.params.get('seed', 10))
 
         self.output_path = Path(self.params['output_path'])
-        if not self.output_path.exists():
-            self.output_path.mkdir(parents=True)
+        self.output_path.mkdir(parents=True)
 
         write_yaml(self.output_path / 'spec.yaml', self.params)
 
