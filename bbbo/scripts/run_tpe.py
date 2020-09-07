@@ -1,5 +1,7 @@
 import argparse
 
+from pathlib import Path
+
 from utils.file import read_yaml
 from utils.pdb import register_pdb_hook
 register_pdb_hook()
@@ -24,3 +26,4 @@ if __name__ == '__main__':
     spec = read_yaml(_args.spec)
     explorer = TPEExplorer(spec)
     res = explorer.start()
+    explorer.save(Path(_args.spec['output_path']) / 'db.pkl')
