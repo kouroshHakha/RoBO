@@ -1,0 +1,7 @@
+env: bb_envs/src/bb_envs/benchmark_functions/envs/bo_test1d.yaml
+seed: 10
+niter: 10
+maximizer: scipy
+acquisition_func: ei
+model_type: bohamiann
+output_path: runs/test1d/bohamiann_ei_scipy/s20

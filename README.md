@@ -76,3 +76,8 @@ acquisition_func: lcb             // optional parameter for bo Explorer
 model_type: bohamiann             // optional parameter for bo Explorer
 output_path: runs/opamp/tpe/s20   // output path (very important to pick a descriptive name)
 ```
+
+NOTE
+-----
+1. You have to create you output path including the seed number manually.
+2. Some of the fields in the yaml would not be used for all algorithms.

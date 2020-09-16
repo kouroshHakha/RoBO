@@ -26,4 +26,4 @@ if __name__ == '__main__':
     spec = read_yaml(_args.spec)
     explorer = TPEExplorer(spec)
     res = explorer.start()
-    explorer.save(Path(_args.spec['output_path']) / 'db.pkl')
+    explorer.save(Path(spec['output_path']) / 'db.pkl')
